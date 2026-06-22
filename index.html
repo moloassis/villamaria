@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Villa Maria Interativa</title>
+
+    <script src="https://unpkg.com/@panzoom/panzoom@4.6.2/dist/panzoom.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body>
+    <div id="copy">Ana Márcia 2026</div>
+    <div id="viewport">
+      <div id="panzoom-wrapper">
+        <img id="bg-image" src="img/bg-referencia.png" alt="Villa Maria" />
+
+        <!-- 1. Quiz Histórico (Cérebro / Book) -->
+        <div class="hotspot" style="top: 26.5%; left: 12.0%" data-title="Quiz Histórico" data-tooltip="Quiz Histórico" data-description="Teste os seus conhecimentos sobre a história e os segredos da Casa de Cultura Villa Maria!" data-icon="img/icon-brain.png" data-is-quiz="true" data-links='[]'>
+          <img src="img/icon-brain.png" alt="Quiz Histórico" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 2. Aqui está a Villa (Pin de Mapa) -->
+        <div class="hotspot" style="top: 15.0%; left: 25.0%" data-title="Aqui está a Villa" data-tooltip="Aqui está a Villa" data-description="Ao clicar neste elemento gráfico abrirá o mapa com a localização da Casa de Cultura Villa Maria." data-icon="img/icon-map-pin.png" data-links='[{"label": "Ver no Google Maps", "url": "https://www.google.com/maps/search/?api=1&query=Casa+de+Cultura+Villa+Maria+Campos+dos+Goytacazes"}, {"label": "Acessar Mapa no Drive", "url": "https://drive.google.com"}]'>
+          <img src="img/icon-map-pin.png" alt="Aqui está a Villa" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 3. Nossa Escola na Villa (Escola / Chapéu) -->
+        <div class="hotspot" style="top: 11.5%; left: 39.0%" data-title="Nossa Escola na Villa" data-tooltip="Nossa Escola na Villa" data-description="Clicando neste elemento gráfico o usuário poderá anexar imagens, vídeos e documentos de visitas a Casa de Cultura Villa Maria." data-icon="img/icon-school.png" data-is-upload="true" data-links='[]'>
+          <img src="img/icon-school.png" alt="Nossa Escola na Villa" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 4. É Notícia? Virou História (Jornal) -->
+        <div class="hotspot" style="top: 13.0%; left: 54.0%" data-title="É Notícia? Virou História" data-tooltip="É Notícia? Virou História" data-description="Clicando neste elemento gráfico será visualizado notícias relacionadas a Casa de Cultura Villa Maria." data-icon="img/icon-newspaper.png" data-links='[{"label": "Acessar Notícias no Instagram", "url": "https://www.instagram.com/casadeculturavillamaria?igsh=eGJlcWJveXQwdnM%3D"}]'>
+          <img src="img/icon-newspaper.png" alt="É Notícia? Virou História" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 5. Quer saber mais? (Megafone) -->
+        <div class="hotspot" style="top: 13.0%; left: 69.0%" data-title="Quer saber mais?" data-tooltip="Quer saber mais?" data-description="Este ícone conterá vídeos e reportagens sobre a Casa de Cultura Villa Maria." data-icon="img/icon-megaphone.png" data-links='[{"label": "Patrimônio Cultural Fluminense (Matéria)", "url": "https://j3news.com/2024/07/20/casa-de-cultur-a-villa-maria-e-declarada-patrimonio-cultural-e-material-do-estado-do-rio/"}, {"label": "Vídeo Institucional Villa Maria", "url": "https://www.youtube.com/watch?v=W3Ad8AYmWlw"}, {"label": "Bazar de Arte e Artesanato (Matéria)", "url": "https://g1.globo.com/rj/norte-fluminense/noticia/casa-de-cultura-villa-maria-em-campos-rj-recebera-bazar-de-arte-e-artesanato.ghtml"}, {"label": "Grupo Pé de Pitanga (Matéria)", "url": "https://g1.globo.com/rj/norte-fluminense/noticia/casa-de-cultura-villa-maria-em-campos-rj-tera-apresentacao-de-grupo-pe-de-pitanga.ghtml"}, {"label": "Melhorias de R$ 1.5 Milhão (Matéria)", "url": "https://j3news.com/2022/11/27/casa-de-cultur-a-villa-maria-passa-por-melhorias-de-r-15-milhao/"}, {"label": "Evento da Abolição da Escravatura", "url": "https://g1.globo.com/rj/norte-fluminense/noticia/2019/05/13/villa-maria-em-campos-rj-tera-evento-sobre-a-abolicao-da-escravatura.ghtml"}, {"label": "25 Anos da Casa de Cultura (Matéria)", "url": "https://j3news.com/2018/01/16/casa-de-cultur-a-villa-maria-faz-25-anos-com-programacao-comemorativa-durante-todo-o-2018/"}, {"label": "Documentário Villa Maria (YouTube)", "url": "https://www.youtube.com/watch?v=rA7s7jyYApw"}, {"label": "Reportagem Especial (YouTube)", "url": "https://www.youtube.com/watch?v=HJHMKxqyC0"}]'>
+          <img src="img/icon-megaphone.png" alt="Quer saber mais?" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 6. Vozes da Villa (Microfone) -->
+        <div class="hotspot" style="top: 15.0%; left: 83.0%" data-title="Vozes da Villa" data-tooltip="Vozes da Villa" data-description="Assista a reportagens, podcasts e gravações de áudio sobre as atividades e eventos culturais promovidos pela Villa Maria." data-icon="img/icon-microphone.png" data-links='[{"label": "Acessar Canal de Vídeos", "url": "https://www.youtube.com/channel/UCDSdATja-KWXfWQORvrvbUw"}]'>
+          <img src="img/icon-microphone.png" alt="Vozes da Villa" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 7. Campos dos Goytacazes - Direções (Placa / Signpost) -->
+        <div class="hotspot" style="top: 32.5%; left: 92.0%" data-title="Campos dos Goytacazes (Direções)" data-tooltip="Campos dos Goytacazes (Direções)" data-description="Este ícone trará a localização e direções para o município de Campos dos Goytacazes." data-icon="img/icon-signpost.png" data-links='[{"label": "Ver no Google Maps", "url": "https://www.google.com/maps/place/Campos+dos+Goytacazes+-+State+of+Rio+de+Janeiro"}]'>
+          <img src="img/icon-signpost.png" alt="Campos dos Goytacazes Placa" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 8. Campos dos Goytacazes - Mapa (Mapa/Caminho) -->
+        <div class="hotspot" style="top: 55.5%; left: 93.0%" data-title="Campos dos Goytacazes (Mapa)" data-tooltip="Campos dos Goytacazes (Mapa)" data-description="Este ícone trará o mapa do município de Campos dos Goytacazes." data-icon="img/icon-map-path.png" data-links='[{"label": "Ver Município no Google Maps", "url": "https://www.google.com/maps/place/Campos+dos+Goytacazes+-+State+of+Rio+de+Janeiro"}]'>
+          <img src="img/icon-map-path.png" alt="Campos dos Goytacazes Mapa" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 9. Campos nas Redes (Celular) -->
+        <div class="hotspot" style="top: 79.5%; left: 91.0%" data-title="Campos nas Redes" data-tooltip="Campos nas Redes" data-description="Este ícone trará links que direcionarão para as redes sociais oficiais da Campos dos Goytacazes e da Casa de Cultura Villa Maria." data-icon="img/icon-smartphone.png" data-links='[{"label": "Canal Oficial do YouTube", "url": "https://www.youtube.com/channel/UCDSdATja-KWXfWQORvrvbUw"}, {"label": "Perfil Oficial do Instagram", "url": "https://www.instagram.com/casadeculturavillamaria?igsh=eGJlcWJveXQwdnM%3D"}, {"label": "Página Oficial do Facebook", "url": "https://www.facebook.com/p/Casa-de-Cultura-Villa-Maria-100063504975520/?locale=pt_BR"}]'>
+          <img src="img/icon-smartphone.png" alt="Campos nas Redes" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 10. Tesouros do Casarão (Mapa / Caminho) -->
+        <div class="hotspot" style="top: 89.0%; left: 14.0%" data-title="Tesouros do Casarão" data-tooltip="Tesouros do Casarão" data-description="Neste elemento gráfico conterá imagens do ambiente externo do Casarão, como o Coreto, o Jardim entre outros." data-icon="img/icon-map-path.png" data-links='[{"label": "Ver Galeria de Imagens (Drive)", "url": "https://drive.google.com"}]'>
+          <img src="img/icon-map-path.png" alt="Tesouros do Casarão" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 11. Cliques Históricos (Câmera) -->
+        <div class="hotspot" style="top: 68.0%; left: 8.5%" data-title="Cliques Históricos" data-tooltip="Cliques Históricos" data-description="Clicando neste ícone poderá ser visualizado o acervo e o documento do acervo analítico da Casa de Cultura Villa Maria." data-icon="img/icon-camera.png" data-links='[{"label": "Acessar Portal do Acervo", "url": "https://acervo.vmaria.uenf.br/"}, {"label": "Visualizar Inventário Analítico (PDF)", "url": "https://uenf.br/reitoria/villamaria/files/2024/10/Inventario-Analitico.pdf"}]'>
+          <img src="img/icon-camera.png" alt="Cliques Históricos" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+
+        <!-- 12. Tesouros Históricos (Pergaminho / Pena) -->
+        <div class="hotspot" style="top: 47.0%; left: 8.0%" data-title="Tesouros Históricos" data-tooltip="Tesouros Históricos" data-description="Este ícone conterá imagens e documentos histórico do acervo da Casa de Cultura Villa Maria." data-icon="img/icon-scroll.png" data-links='[{"label": "Explorar Acervo Histórico", "url": "https://uenf.br/reitoria/villamaria/acervo/"}]'>
+          <img src="img/icon-scroll.png" alt="Tesouros Históricos" style="width:100%;height:100%;pointer-events:none;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Painel de Instruções de Navegação (Canto Inferior Esquerdo) -->
+    <div id="nav-instructions" class="minimized">
+      <div class="inst-header">
+        <span class="inst-icon">ℹ️</span>
+        <h3>Como Navegar</h3>
+        <button id="inst-toggle" aria-label="Minimizar instruções">&times;</button>
+      </div>
+      <div class="inst-content">
+        <div class="inst-item">
+          <span class="inst-label">🖱️ Mouse</span>
+          <span class="inst-desc">Roda do mouse para zoom e arraste para rolar</span>
+        </div>
+        <div class="inst-item">
+          <span class="inst-label">📱 Tela Touch</span>
+          <span class="inst-desc">Swipe / Pinça para zoom e arraste pro lado para ver</span>
+        </div>
+        <div class="inst-item">
+          <span class="inst-label">⌨️ Teclado (Setas)</span>
+          <span class="inst-desc">Use as setas (← ↑ → ↓) para navegar no mapa</span>
+        </div>
+        <div class="inst-item">
+          <span class="inst-label">⌨️ Teclado / Botões</span>
+          <span class="inst-desc">Teclas [+] e [-] ou botões na tela para zoom</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles de Zoom Flutuantes (Canto Inferior Direito) -->
+    <div id="zoom-controls">
+      <button id="zoom-in" title="Aumentar Zoom">+</button>
+      <button id="zoom-out" title="Diminuir Zoom">&minus;</button>
+    </div>
+
+    <!-- Modal Interativo Premium (Glassmorphism) -->
+    <div id="info-modal" class="modal-backdrop" aria-hidden="true">
+      <div class="modal-content">
+        <button id="modal-close" class="modal-close-btn" aria-label="Fechar modal">&times;</button>
+        <div class="modal-header">
+          <img id="modal-icon" src="" alt="Ícone do Recurso" />
+          <h2 id="modal-title">Título do Recurso</h2>
+        </div>
+        <div class="modal-body">
+          <p id="modal-description">Descrição do recurso.</p>
+          <div id="modal-interactive-area"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>
