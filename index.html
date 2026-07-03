@@ -53,17 +53,17 @@
         </div>
 
         <!-- 8. Campos dos Goytacazes - Mapa (Mapa/Caminho) -->
-        <div class="hotspot" style="top: 55.5%; left: 93.0%" data-title="Campos dos Goytacazes (Mapa)" data-tooltip="Campos dos Goytacazes (Mapa)" data-description="Este ícone trará o mapa do município de Campos dos Goytacazes." data-icon="img/icon-map-path.png" data-links='[{"label": "Ver Município no Google Maps", "url": "https://www.google.com/maps/place/Campos+dos+Goytacazes+-+State+of+Rio+de+Janeiro"}]'>
+      <!--   <div class="hotspot" style="top: 55.5%; left: 93.0%" data-title="Campos dos Goytacazes (Mapa)" data-tooltip="Campos dos Goytacazes (Mapa)" data-description="Este ícone trará o mapa do município de Campos dos Goytacazes." data-icon="img/icon-map-path.png" data-links='[{"label": "Ver Município no Google Maps", "url": "https://www.google.com/maps/place/Campos+dos+Goytacazes+-+State+of+Rio+de+Janeiro"}]'>
           <img src="img/icon-map-path.png" alt="Campos dos Goytacazes Mapa" style="width:100%;height:100%;pointer-events:none;" />
-        </div>
+        </div> -->
 
         <!-- 9. Campos nas Redes (Celular) -->
-        <div class="hotspot" style="top: 79.5%; left: 91.0%" data-title="Campos nas Redes" data-tooltip="Campos nas Redes" data-description="Este ícone trará links que direcionarão para as redes sociais oficiais da Campos dos Goytacazes e da Casa de Cultura Villa Maria." data-icon="img/icon-smartphone.png" data-links='[{"label": "Canal Oficial do YouTube", "url": "https://www.youtube.com/channel/UCDSdATja-KWXfWQORvrvbUw"}, {"label": "Perfil Oficial do Instagram", "url": "https://www.instagram.com/casadeculturavillamaria?igsh=eGJlcWJveXQwdnM%3D"}, {"label": "Página Oficial do Facebook", "url": "https://www.facebook.com/p/Casa-de-Cultura-Villa-Maria-100063504975520/?locale=pt_BR"}]'>
+        <div class="hotspot" style="top: 55.5%; left: 93.0%" data-title="Campos nas Redes" data-tooltip="Campos nas Redes" data-description="Este ícone trará links que direcionarão para as redes sociais oficiais da Campos dos Goytacazes e da Casa de Cultura Villa Maria." data-icon="img/icon-smartphone.png" data-links='[{"label": "Canal Oficial do YouTube", "url": "https://www.youtube.com/channel/UCDSdATja-KWXfWQORvrvbUw"}, {"label": "Perfil Oficial do Instagram", "url": "https://www.instagram.com/casadeculturavillamaria?igsh=eGJlcWJveXQwdnM%3D"}, {"label": "Página Oficial do Facebook", "url": "https://www.facebook.com/p/Casa-de-Cultura-Villa-Maria-100063504975520/?locale=pt_BR"}]'>
           <img src="img/icon-smartphone.png" alt="Campos nas Redes" style="width:100%;height:100%;pointer-events:none;" />
         </div>
 
         <!-- 10. Tesouros do Casarão (Mapa / Caminho) -->
-        <div class="hotspot" style="top: 89.0%; left: 14.0%" data-title="Tesouros do Casarão" data-tooltip="Tesouros do Casarão" data-description="Neste elemento gráfico conterá imagens do ambiente externo do Casarão, como o Coreto, o Jardim entre outros." data-icon="img/icon-map-path.png" data-links='[{"label": "Ver Galeria de Imagens (Drive)", "url": "https://drive.google.com"}]'>
+        <div class="hotspot" style="top: 79.5%; left: 91.0%" data-title="Tesouros do Casarão" data-tooltip="Tesouros do Casarão" data-description="Neste elemento gráfico conterá imagens do ambiente externo do Casarão, como o Coreto, o Jardim entre outros." data-icon="img/icon-map-path.png" data-links='[{"label": "Ver Galeria de Imagens (Drive)", "url": "https://drive.google.com"}]'>
           <img src="img/icon-map-path.png" alt="Tesouros do Casarão" style="width:100%;height:100%;pointer-events:none;" />
         </div>
 
@@ -125,6 +125,24 @@
           <div id="modal-interactive-area"></div>
         </div>
       </div>
+    </div>
+
+    <!-- Lightbox de Fotos Premium (Tesouros do Casarão) -->
+    <div id="lightbox-modal" class="lightbox-backdrop" aria-hidden="true">
+      <button id="lightbox-close" class="lightbox-close-btn" aria-label="Fechar galeria">&times;</button>
+      
+      <button id="lightbox-prev" class="lightbox-nav-btn prev-btn" aria-label="Imagem anterior">&#10094;</button>
+      
+      <div class="lightbox-content">
+        <div class="lightbox-img-wrapper">
+          <img id="lightbox-img" src="" alt="Foto do Casarão" />
+        </div>
+        <div class="lightbox-caption">
+          <span id="lightbox-counter">1 / 15</span>
+        </div>
+      </div>
+      
+      <button id="lightbox-next" class="lightbox-nav-btn next-btn" aria-label="Próxima imagem">&#10095;</button>
     </div>
 
     <script src="js/index.js"></script>

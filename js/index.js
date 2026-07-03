@@ -21,6 +21,61 @@ const QUIZ_QUESTIONS = [
     question: "A Casa de Cultura Villa Maria pertence a qual universidade?",
     options: ["UFRJ", "UENF", "UFF", "UFES"],
     correctIndex: 1
+  },
+  {
+    question: "Quem idealizou o projeto da Casa de Cultura?",
+    options: ["José Benevento", "Finasinha", "Darcy Ribeiro", "Atilano Chrisóstomo"],
+    correctIndex: 1
+  },
+  {
+    question: "O palacete Villa Maria foi construído como presente para quem?",
+    options: ["A professora Maria Queiroz", "A Prefeitura de Campos", "A Universidade", "A Câmara Municipal"],
+    correctIndex: 0
+  },
+  {
+    question: "Como Maria Queiroz era conhecida?",
+    options: ["Rainha do Café", "Finasinha", "Dona Maria", "Bela Maria"],
+    correctIndex: 1
+  },
+  {
+    question: "Por que Finasinha recebeu o apelido de “Rainha da Bondade”?",
+    options: ["Porque gostava de música", "Porque ajudava as pessoas e distribuía presentes", "Porque era cantora", "Porque trabalhava na Prefeitura"],
+    correctIndex: 1
+  },
+  {
+    question: "O que existia na Casa de Cultura para as pessoas assistirem filmes?",
+    options: ["Biblioteca", "Sala de aula", "Videoteca", "Teatro"],
+    correctIndex: 2
+  },
+  {
+    question: "O que a Fonoteca oferecia ao público?",
+    options: ["Jogos", "Filmes", "Livros", "Músicas e acervo fonográfico"],
+    correctIndex: 3
+  },
+  {
+    question: "Complete a frase:<br>A Casa de Cultura Villa Maria ajudou a promover a _____________, a música, o cinema e a leitura em Campos dos Goytacazes.",
+    type: "text",
+    correctAnswer: "cultura"
+  },
+  {
+    question: "Por que a Casa de Cultura Villa Maria é importante para Campos dos Goytacazes?",
+    options: ["Porque vende roupas", "Porque promove cultura, leitura, música e cinema", "Porque é um supermercado", "Porque é uma fábrica"],
+    correctIndex: 1
+  },
+  {
+    question: "O que mais marcou a história de Finasinha?",
+    options: ["Ela era cantora famosa", "Ela distribuía presentes e ajudava as pessoas", "Ela morava em outro país", "Ela trabalhava em um cinema"],
+    correctIndex: 1
+  },
+  {
+    question: "O que as pessoas podiam fazer na Videoteca?",
+    options: ["Assistir filmes", "Comprar roupas", "Jogar bola", "Aprender a dirigir"],
+    correctIndex: 0
+  },
+  {
+    question: "O que a Sala de Leitura oferecia aos estudantes?",
+    options: ["Material de pesquisa e livros", "Jogos eletrônicos", "Piscina", "Animais para visitação"],
+    correctIndex: 0
   }
 ];
 
@@ -35,6 +90,32 @@ const modalTitle = document.getElementById("modal-title");
 const modalDescription = document.getElementById("modal-description");
 const modalInteractiveArea = document.getElementById("modal-interactive-area");
 const modalClose = document.getElementById("modal-close");
+
+// Elementos do Lightbox (Tesouros do Casarão)
+const LIGHTBOX_IMAGES = [
+  "fotos/IMG_0010.jpg",
+  "fotos/IMG_0013.jpg",
+  "fotos/IMG_0014.jpg",
+  "fotos/IMG_0017.jpg",
+  "fotos/IMG_0018.jpg",
+  "fotos/IMG_0020.jpg",
+  "fotos/IMG_0022.jpg",
+  "fotos/IMG_0032.jpg",
+  "fotos/IMG_0034.jpg",
+  "fotos/IMG_0038.jpg",
+  "fotos/IMG_0039.jpg",
+  "fotos/IMG_0043.jpg",
+  "fotos/IMG_0044.jpg",
+  "fotos/IMG_0046.jpg",
+  "fotos/IMG_0047.jpg"
+];
+let lightboxCurrentIndex = 0;
+const lightboxModal = document.getElementById("lightbox-modal");
+const lightboxImg = document.getElementById("lightbox-img");
+const lightboxCounter = document.getElementById("lightbox-counter");
+const lightboxCloseBtn = document.getElementById("lightbox-close");
+const lightboxPrevBtn = document.getElementById("lightbox-prev");
+const lightboxNextBtn = document.getElementById("lightbox-next");
 
 // Função para abrir o Modal com metadados do hotspot
 // Função que controla o estado e interface do Quiz Interativo
@@ -87,10 +168,47 @@ function initInteractiveQuiz(container) {
     });
   }
 
+  function normalizeText(text) {
+    if (!text) return "";
+    return text
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
   function renderQuestion(index) {
     const q = QUIZ_QUESTIONS[index];
     const totalQuestions = QUIZ_QUESTIONS.length;
     const progressPercent = ((index + 1) / totalQuestions) * 100;
+    const isTextQuestion = q.type === "text";
+
+    let questionContentHtml = "";
+    if (isTextQuestion) {
+      questionContentHtml = `
+        <div class="quiz-text-answer-wrapper">
+          <input type="text" id="quiz-text-input" class="quiz-input" placeholder="Digite sua resposta aqui..." autocomplete="off" />
+          <button id="quiz-btn-submit-text" class="modal-btn" style="margin-top: 12px; width: 100%;">
+            Confirmar Resposta ➔
+          </button>
+        </div>
+        <div id="quiz-text-feedback" class="quiz-text-feedback" style="display: none;"></div>
+      `;
+    } else {
+      questionContentHtml = `
+        <div class="quiz-options-list">
+          ${q.options.map((option, i) => {
+            const letter = String.fromCharCode(97 + i); // a, b, c, d
+            return `
+              <div class="quiz-option" data-index="${i}">
+                <span class="quiz-option-letter">${letter.toUpperCase()}</span>
+                <span class="quiz-option-text">${option}</span>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
 
     container.innerHTML = `
       <div class="quiz-container">
@@ -107,17 +225,7 @@ function initInteractiveQuiz(container) {
 
         <h3 class="quiz-question-text">${q.question}</h3>
 
-        <div class="quiz-options-list">
-          ${q.options.map((option, i) => {
-            const letter = String.fromCharCode(97 + i); // a, b, c, d
-            return `
-              <div class="quiz-option" data-index="${i}">
-                <span class="quiz-option-letter">${letter.toUpperCase()}</span>
-                <span class="quiz-option-text">${option}</span>
-              </div>
-            `;
-          }).join("")}
-        </div>
+        ${questionContentHtml}
 
         <div class="quiz-action-area" style="display: none;">
           <button id="quiz-btn-next" class="modal-btn" style="width: 100%;">
@@ -127,36 +235,89 @@ function initInteractiveQuiz(container) {
       </div>
     `;
 
-    const options = container.querySelectorAll(".quiz-option");
     const actionArea = container.querySelector(".quiz-action-area");
     const btnNext = document.getElementById("quiz-btn-next");
-    let selected = false;
 
-    options.forEach(opt => {
-      opt.addEventListener("click", function() {
-        if (selected) return;
-        selected = true;
+    if (isTextQuestion) {
+      const textInput = document.getElementById("quiz-text-input");
+      const btnSubmit = document.getElementById("quiz-btn-submit-text");
+      const feedbackDiv = document.getElementById("quiz-text-feedback");
+      let submitted = false;
 
-        const selectedIndex = parseInt(this.dataset.index);
-        userAnswers.push(selectedIndex);
-
-        // Desabilita novas escolhas
-        options.forEach(o => o.classList.add("disabled"));
-
-        // Compara com a resposta correta
-        if (selectedIndex === q.correctIndex) {
-          this.classList.add("correct");
-          score++;
-        } else {
-          this.classList.add("incorrect");
-          // Mostra a correta em verde
-          options[q.correctIndex].classList.add("correct");
+      const handleTextSubmit = () => {
+        if (submitted) return;
+        const answerVal = textInput.value.trim();
+        if (!answerVal) {
+          textInput.style.borderColor = "#ef4444";
+          textInput.focus();
+          return;
         }
 
-        // Mostra a área de ação/próxima pergunta
+        submitted = true;
+        textInput.disabled = true;
+        btnSubmit.disabled = true;
+        btnSubmit.style.display = "none";
+
+        userAnswers.push(answerVal);
+
+        const isCorrect = normalizeText(answerVal) === normalizeText(q.correctAnswer);
+
+        feedbackDiv.style.display = "flex";
+        if (isCorrect) {
+          feedbackDiv.className = "quiz-text-feedback correct";
+          feedbackDiv.innerHTML = `<span>✓</span> Resposta correta!`;
+          score++;
+        } else {
+          feedbackDiv.className = "quiz-text-feedback incorrect";
+          feedbackDiv.innerHTML = `<span>✗</span> Resposta incorreta. Correta: <strong>${q.correctAnswer}</strong>`;
+        }
+
         actionArea.style.display = "flex";
+      };
+
+      btnSubmit.addEventListener("click", handleTextSubmit);
+      textInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          handleTextSubmit();
+        }
       });
-    });
+
+      // Auto-focus input
+      setTimeout(() => {
+        textInput.focus();
+      }, 100);
+
+    } else {
+      const options = container.querySelectorAll(".quiz-option");
+      const btnNext = document.getElementById("quiz-btn-next");
+      let selected = false;
+
+      options.forEach(opt => {
+        opt.addEventListener("click", function() {
+          if (selected) return;
+          selected = true;
+
+          const selectedIndex = parseInt(this.dataset.index);
+          userAnswers.push(selectedIndex);
+
+          // Desabilita novas escolhas
+          options.forEach(o => o.classList.add("disabled"));
+
+          // Compara com a resposta correta
+          if (selectedIndex === q.correctIndex) {
+            this.classList.add("correct");
+            score++;
+          } else {
+            this.classList.add("incorrect");
+            // Mostra a correta em verde
+            options[q.correctIndex].classList.add("correct");
+          }
+
+          // Mostra a área de ação/próxima pergunta
+          actionArea.style.display = "flex";
+        });
+      });
+    }
 
     btnNext.addEventListener("click", () => {
       currentQuestionIndex++;
@@ -183,9 +344,12 @@ function initInteractiveQuiz(container) {
       escola: currentUser.escola,
       score: score,
       total: QUIZ_QUESTIONS.length,
-      respostas: userAnswers.map((ansIdx, qIdx) => {
+      respostas: userAnswers.map((ans, qIdx) => {
         const q = QUIZ_QUESTIONS[qIdx];
-        return `Q${qIdx + 1}: ${q.options[ansIdx]} (Correta: ${q.options[q.correctIndex]})`;
+        if (q.type === "text") {
+          return `Q${qIdx + 1}: ${ans} (Correta: ${q.correctAnswer})`;
+        }
+        return `Q${qIdx + 1}: ${q.options[ans]} (Correta: ${q.options[q.correctIndex]})`;
       })
     };
 
@@ -236,7 +400,7 @@ function initInteractiveQuiz(container) {
       scoreBadge = "🏆";
       feedbackTitle = "Excelente! Desempenho Perfeito!";
       feedbackText = `Parabéns, ${currentUser.nome}! Você domina a história da Villa Maria como um especialista!`;
-    } else if (score >= 2) {
+    } else if (score >= Math.round(total * 0.7)) {
       badgeGlowClass = "silver";
       scoreBadge = "🌟";
       feedbackTitle = "Muito bom! Ótimo Trabalho!";
@@ -304,6 +468,10 @@ function initInteractiveQuiz(container) {
 // Função para abrir o Modal com metadados do hotspot
 function openModal(hotspot) {
   const title = hotspot.dataset.title;
+  if (title === "Tesouros do Casarão") {
+    openLightbox();
+    return;
+  }
   const description = hotspot.dataset.description;
   const icon = hotspot.dataset.icon;
   const links = JSON.parse(hotspot.dataset.links || "[]");
@@ -394,6 +562,89 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+// ==========================================
+// FUNÇÕES DO LIGHTBOX (TESOUROS DO CASARÃO)
+// ==========================================
+function openLightbox() {
+  lightboxCurrentIndex = 0;
+  updateLightboxImage();
+  lightboxModal.classList.add("open");
+  lightboxModal.setAttribute("aria-hidden", "false");
+}
+
+function closeLightbox() {
+  lightboxModal.classList.remove("open");
+  lightboxModal.setAttribute("aria-hidden", "true");
+}
+
+function updateLightboxImage() {
+  lightboxImg.classList.add("changing");
+  
+  const tempImg = new Image();
+  tempImg.src = LIGHTBOX_IMAGES[lightboxCurrentIndex];
+  tempImg.onload = () => {
+    lightboxImg.src = LIGHTBOX_IMAGES[lightboxCurrentIndex];
+    lightboxCounter.textContent = `${lightboxCurrentIndex + 1} / ${LIGHTBOX_IMAGES.length}`;
+    lightboxImg.classList.remove("changing");
+  };
+}
+
+function navigateLightbox(direction) {
+  lightboxCurrentIndex += direction;
+  if (lightboxCurrentIndex < 0) {
+    lightboxCurrentIndex = LIGHTBOX_IMAGES.length - 1;
+  } else if (lightboxCurrentIndex >= LIGHTBOX_IMAGES.length) {
+    lightboxCurrentIndex = 0;
+  }
+  updateLightboxImage();
+}
+
+// Eventos do Lightbox
+if (lightboxCloseBtn) {
+  lightboxCloseBtn.addEventListener("click", closeLightbox);
+}
+if (lightboxPrevBtn) {
+  lightboxPrevBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    navigateLightbox(-1);
+  });
+}
+if (lightboxNextBtn) {
+  lightboxNextBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    navigateLightbox(1);
+  });
+}
+if (lightboxModal) {
+  lightboxModal.addEventListener("click", (e) => {
+    if (e.target === lightboxModal) {
+      closeLightbox();
+    }
+  });
+
+  // Suporte a Swipe no Mobile para o Lightbox
+  let lightboxTouchStartX = 0;
+  let lightboxTouchEndX = 0;
+
+  lightboxModal.addEventListener("touchstart", (e) => {
+    if (e.touches && e.touches.length > 0) {
+      lightboxTouchStartX = e.touches[0].clientX;
+    }
+  }, { passive: true });
+
+  lightboxModal.addEventListener("touchend", (e) => {
+    if (e.changedTouches && e.changedTouches.length > 0) {
+      lightboxTouchEndX = e.changedTouches[0].clientX;
+      const swipeThreshold = 50;
+      if (lightboxTouchEndX < lightboxTouchStartX - swipeThreshold) {
+        navigateLightbox(1); // Swipe esquerda -> próxima imagem
+      } else if (lightboxTouchEndX > lightboxTouchStartX + swipeThreshold) {
+        navigateLightbox(-1); // Swipe direita -> imagem anterior
+      }
+    }
+  }, { passive: true });
+}
+
 function initApp() {
   const panzoom = Panzoom(wrapper, {
     maxScale: 12,
@@ -423,6 +674,19 @@ function initApp() {
   // Controle de Navegação e Zoom via Teclado
   const panStep = 50;
   window.addEventListener("keydown", (e) => {
+    // Se o Lightbox estiver aberto, controla o Lightbox
+    if (lightboxModal && lightboxModal.classList.contains("open")) {
+      if (e.key === "ArrowLeft") {
+        navigateLightbox(-1);
+      } else if (e.key === "ArrowRight") {
+        navigateLightbox(1);
+      } else if (e.key === "Escape") {
+        closeLightbox();
+      }
+      e.preventDefault();
+      return;
+    }
+
     // Se o modal estiver aberto, não navega no mapa
     if (modal.classList.contains("open")) return;
 
